@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.academicearth" name="Academic Earth" version=".3" provider-name="jbel">
+    <requires>
+        <import addon="xbmc.python" version="1.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <minversion>31632</minversion>
+        <summary>Watch lectures from academicearth.org.</summary>
+        <description>Online degrees and video courses from leading universities.</description>
+        <disclaimer>Only free coures/lectures are listed.</disclaimer>
+    </extension>
+</addon>

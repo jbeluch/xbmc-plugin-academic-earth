@@ -1,14 +1,27 @@
-#!/usr/bin/env python
-#Academic Earth Video Plugin.py
+# Copyright 2010 Jonathan Beluch. 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import re
 from urllib import unquote_plus
 from resources.lib.BeautifulSoup import BeautifulSoup as BS, SoupStrainer as SS
 from resources.lib.xbmcvideoplugin import (XBMCVideoPlugin, DialogProgress,
     urlread, async_urlread, parse_qs)
 
-"""Currently doesn't support all lectures on the website.  Some lectures use
-a third party video hosting site (which are currently working) and some lectures
-use embedded youtube videos (which are not currently supported)."""
+"""Currently doesn't support all lectures on the website.  Some lectures
+use a third party video hosting site (which are currently working) and
+some lectures use embedded youtube videos (which are not currently 
+supported)."""
 
 IGNORE_LIST = ['Online Bachelor\'s Degrees',
                'Online Courses for Credit',
@@ -24,7 +37,8 @@ class AcademicEarth(XBMCVideoPlugin):
     def display_subjects(self, url):
         """Takes a url and displays subjects."""
         html = urlread(url)
-        div_tags = BS(html, parseOnlyThese=SS('div', {'class': 'institution-list'}))
+        div_tags = BS(html, 
+                      parseOnlyThese=SS('div', {'class': 'institution-list'}))
         #Build the list of subjects.  Sometimes there is more than one div_tag,
         #so loop through each div_tag, and then for each div_tag, loop through
         #all the <a> tags and parse the subject information.
@@ -40,7 +54,8 @@ class AcademicEarth(XBMCVideoPlugin):
         """Takes a subject url and displays a list of all topics on the page"""
         html = urlread(url)
         #get the div which contains all of the topic <a> tags
-        div_topics = BS(html, parseOnlyThese=SS('div', {'class': 'results-side'}))
+        div_topics = BS(html, 
+                        parseOnlyThese=SS('div', {'class': 'results-side'}))
         #create the list of dirs by parsing all the a tags in the div
         dirs = [{'name': a.text, 'url': self._urljoin(a['href']), 'mode': '2'} 
                 for a in div_topics('a')]
@@ -65,7 +80,7 @@ class AcademicEarth(XBMCVideoPlugin):
         html = urlread(url)
         #get the div which contains all of the <li> lecture tags
         div_tag = BS(html, parseOnlyThese=SS('div', {'class': 'results-list'}))
-        #parse the name, url to the html lecture page, desc, tn for each lecture
+        #parse the name, url, desc, tn for each lecture
         dirs = [{'name': li.h4.a.text,
                  'htmlurl': self._urljoin(li.h4.a['href']),
                  'info': {'plot': li.p.text, 'title': li.h4.a.text},
@@ -93,13 +108,14 @@ class AcademicEarth(XBMCVideoPlugin):
         #dp = self.xbmcgui.DialogProgress()
         html = urlread(url)
         #get the div which contains all of the topic <a> tags
-        div_topics = BS(html, parseOnlyThese=SS('div', {'class': 'results-side'}))
+        div_topics = BS(html, 
+                        parseOnlyThese=SS('div', {'class': 'results-side'}))
         #create a list of urls for all topics
         topic_urls = [self._urljoin(a['href']) for a in div_topics('a')
             if a.text.startswith('Online') == False and
             'Credit' not in a.text and not a.text.startswith('All')]
         self.dp = DialogProgress('Academic Earth',
-                                 line1='Downloading course and lecture info...',
+                                 line1='Downloading course/lecture info...',
                                  num_steps=(2 * len(topic_urls)))
         topic_htmls = async_urlread(topic_urls, self.dp)
         courses, lectures = self._get_courses_lectures(topic_htmls)
@@ -119,7 +135,8 @@ class AcademicEarth(XBMCVideoPlugin):
         #results for a topic, parse all page results urls from the topic page,
         #then download each of the extra pages of results, then parse the video
         #results.
-        pagination_urls = [url for html in htmls for url in self._get_pagination_urls(html)]
+        pagination_urls = [url for html in htmls
+                           for url in self._get_pagination_urls(html)]
         #Download every pagination page.  If a dialog progress box exists,
         #update the step for each increment.  Allocate 50% of the bar for
         #downloading the pagination urls.  The other 50% is allocated to
@@ -163,8 +180,9 @@ class AcademicEarth(XBMCVideoPlugin):
         ul_tags = BS(html, parseOnlyThese=SS('ul', {'class': 'pagination'}))
         #choose the first pagination <ul> tag since both <ul>s are identical
         ul = ul_tags('ul', limit=1)[0]
-        #return the complete url for each link in the <ul>, ignore the last url 
-        #in the list because it is the next page link, so it is already included
+        #return the complete url for each link in the <ul>, ignore the last 
+        #url in the list because it is the next page link, so it is already 
+        #included
         return [self._urljoin(a['href']) for a in ul('a')[:-1]]
 
     def _get_video_results(self, htmls):
@@ -177,7 +195,8 @@ class AcademicEarth(XBMCVideoPlugin):
             div_results = BS(html, 
                 parseOnlyThese=SS('div', {'class': 'video-results'}))
             #filter out empty <li> tags that only contain '&nbsp;'
-            lis = [li for li in div_results('li') if li.get('class') != 'break']
+            lis = [li for li in div_results('li') 
+                   if li.get('class') != 'break']
             #build the list of results, a dict for each results
             res = [{'name': li.h3.text, 
                     'url': self._urljoin(li.a['href']),

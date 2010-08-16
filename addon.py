@@ -64,7 +64,8 @@ class AcademicEarth(XBMCVideoPlugin):
                 'Courses for Credit' not in d['name'] and
                 d['name'].startswith('All') == False]
         #make the first choice on the list = 'View All'
-        dirs.insert(0, {'name': 'View All Results', 'url': url, 'mode': '4'})
+        dirs.insert(0, {'name': self.getString(30100), 
+                        'url': url, 'mode': '4'})
         self.add_dirs(dirs)
 
     def display_courses(self, url):
@@ -88,8 +89,8 @@ class AcademicEarth(XBMCVideoPlugin):
                     li.find('img', {'class': 'thumb-144'})['src'])}
                  for li in div_tag('li')]
         #for each dir, download the lecture's html page and parse the video url
-        self.dp = DialogProgress('Academic Earth',
-                                 line1='Downloading lecture info...',
+        self.dp = DialogProgress(self.getString(30000),
+                                 line1=self.getString(30101),
                                  num_steps=(len(dirs)))
         urls = [d['htmlurl'] for d in dirs]
         responses = async_urlread(urls, self.dp)
@@ -114,8 +115,8 @@ class AcademicEarth(XBMCVideoPlugin):
         topic_urls = [self._urljoin(a['href']) for a in div_topics('a')
             if a.text.startswith('Online') == False and
             'Credit' not in a.text and not a.text.startswith('All')]
-        self.dp = DialogProgress('Academic Earth',
-                                 line1='Downloading course/lecture info...',
+        self.dp = DialogProgress(self.getString(30000),
+                                 line1=self.getString(30102),
                                  num_steps=(2 * len(topic_urls)))
         topic_htmls = async_urlread(topic_urls, self.dp)
         courses, lectures = self._get_courses_lectures(topic_htmls)
@@ -162,7 +163,8 @@ class AcademicEarth(XBMCVideoPlugin):
         #the display link plays a video, and doesn't go to another level of 
         #directory listings
         [l.update({'url': self._get_video_url(l['url']),
-                   'name': '(L) ' + l['name']}) for l in lectures]
+                   'name': self.getString(30103) + l['name']}) 
+                  for l in lectures]
         #filter out lectures with no video url.  This is a result of bad regex
         #parsing, crappy fix...
         lectures = [l for l in lectures if l['url'] is not None]

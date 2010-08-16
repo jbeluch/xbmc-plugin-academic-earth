@@ -41,9 +41,11 @@ from cStringIO import StringIO
 import urllib2
 import urlparse
 import asyncore, socket
+import os
 import xbmc
 import xbmcgui
 import xbmcplugin
+import xbmcaddon
 
 class XBMCVideoPlugin(object):
     """This is a class to help handle routine tasks for a video plugin
@@ -56,9 +58,14 @@ class XBMCVideoPlugin(object):
         self.xbmc = xbmc
         self.xbmcgui = xbmcgui
         self.xbmcplugin = xbmcplugin
+        self.xbmcaddon = xbmcaddon
+        self.addon = self.xbmcaddon.Addon(id=os.path.basename(os.getcwd()))
         self.argv0 = argv0
         self.argv1 = int(argv1)
         self.dp = None
+
+    def getString(self, id):
+        return self.addon.getLocalizedString(id)
         
     def add_videos(self, lis, end=True):
         """Takes a list of directory items which will be added as
@@ -113,11 +120,6 @@ class XBMCVideoPlugin(object):
         if 'tn' in diritem.keys(): li.setThumbnailImage(diritem.get('tn'))
         return (url, li, isFolder)
                
-    def play_video(self, url, info=None):
-        li = self.xbmcgui.ListItem('Lecture')
-        if info: li.setInfo('video', info)
-        self.xbmc.Player(self.xbmc.PLAYER_CORE_MPLAYER).play(url, li)
-
     def _urljoin(self, url):
         return urlparse.urljoin(self.base_url, url)
 

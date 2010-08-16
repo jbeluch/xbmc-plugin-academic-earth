@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+    <string id="30000">Academic Earth</string>
+
+    <!-- settings labels -->
+    <string id="30100">View all results</string>
+    <string id="30101">Downloading lecture info...</string>
+    <string id="30102">Downloading course/lecture info...</string>
+    <string id="30103">(L)</string>
+
+
+
+
+</strings>

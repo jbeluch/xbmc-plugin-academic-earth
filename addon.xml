@@ -10,6 +10,6 @@
         <platform>all</platform>
         <summary>Academic Earth video plugin</summary>
         <description>Watch online video courses from leading universities.</description>
-        <disclaimer>Only free coures/lectures are listed.</disclaimer>
+        <disclaimer>Only free courses/lectures are listed.</disclaimer>
     </extension>
 </addon>

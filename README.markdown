@@ -15,6 +15,15 @@ If you are using an XBMC version before Dharma, check out the
 [XBMC wiki](http://wiki.xbmc.org/?title=HOW-TO_install_and_use_plugins_in_XBMC)
 for installation instructions.
 
+### Version
+
+See addon.xml
+
+## To do
+
+*Add support for youtube hosted lectures.
+
 ### Contact
 
 jon@jonathanbeluch.com
+jbel on [http://forum.xbmc.org](http://forum.xbmc.org)

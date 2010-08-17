@@ -19,9 +19,9 @@ for installation instructions.
 
 See addon.xml
 
-## To do
+### To do
 
-*Add support for youtube hosted lectures.
+* Add support for youtube hosted lectures.
 
 ### Contact
 

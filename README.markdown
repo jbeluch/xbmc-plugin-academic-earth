@@ -25,5 +25,5 @@ See addon.xml
 
 ### Contact
 
-jon@jonathanbeluch.com
+jon@jonathanbeluch.com  
 jbel on [http://forum.xbmc.org](http://forum.xbmc.org)

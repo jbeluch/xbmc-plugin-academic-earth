@@ -184,7 +184,7 @@ class HTTPClient(asyncore.dispatcher):
 
     def handle_close(self):
         if self.dp:
-            self.dp.increment(line3=self.parsed_url[2])
+            self.dp.increment(line2=self.parsed_url[2])
         self.close()
 
     def writable(self):

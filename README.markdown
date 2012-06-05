@@ -1,29 +1,35 @@
-Academic Earth video plugin for XBMC
-====================================
+*This repository is no longer active, please see 
+https://github.com/jbeluch/xbmc-academic-earth for the current version of the 
+XBMC Academic Earth plugin.*
 
-### Summary
 
-Watch lectures from [Academic Earth](http://academicearth.org) within 
-the [XBMC](http://xbmc.org) interface.
 
-### Setup/Installation
+<del>Academic Earth video plugin for XBMC</del>
+<del>====================================
 
-If you are using XBMC Dharma and above, you should be able to install
-this plugin through the official addons installer within XBMC. 
+<del>### Summary
 
-If you are using an XBMC version before Dharma, check out the  
+<del>Watch lectures from [Academic Earth](http://academicearth.org) within 
+the [XBMC](http://xbmc.org) interface.</del>
+
+<del>### Setup/Installation</del>
+
+<del>If you are using XBMC Dharma and above, you should be able to install
+this plugin through the official addons installer within XBMC.</del>
+
+<del>If you are using an XBMC version before Dharma, check out the  
 [XBMC wiki](http://wiki.xbmc.org/?title=HOW-TO_install_and_use_plugins_in_XBMC)
-for installation instructions.
+for installation instructions.</del>
 
-### Version
+<del>### Version</del>
 
-See addon.xml
+<del>See addon.xml</del>
 
-### To do
+<del>### To do</del>
 
-* Add support for youtube hosted lectures.
+<del>* Add support for youtube hosted lectures.</del>
 
-### Contact
+<del>### Contact</del>
 
-jon@jonathanbeluch.com  
-jbel on [http://forum.xbmc.org](http://forum.xbmc.org)
+<del>jon@jonathanbeluch.com  
+jbel on [http://forum.xbmc.org](http://forum.xbmc.org)</del>
